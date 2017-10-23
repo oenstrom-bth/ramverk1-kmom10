@@ -1,0 +1,11 @@
+.shadow {
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+.transition(@property: all, @duration: 400ms, @function: ease) {
+    -webkit-transition: @property @duration @function;
+    -moz-transition: @property @duration @function;
+    -ms-transition: @property @duration @function;
+    -o-transition: @property @duration @function;
+    transition: @property @duration @function;
+}

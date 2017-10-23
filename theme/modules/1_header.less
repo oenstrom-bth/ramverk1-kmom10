@@ -1,0 +1,40 @@
+.site-header {
+    // &::after {
+    //     content: "";
+    //     display: table;
+    //     clear: both;
+    // }
+    // h1 { font-size: 3 * @scale * 1rem; line-height: 3 * @leading; margin-top: 2 * @leading; }
+    // h2 { font-size: 2 * @scale * 1rem; line-height: 2 * @leading; margin-top: 2 * @leading; }
+    // h3 { font-size: 1 * @scale * 1rem; }
+    // h4 { font-size: @scale / 2 * 1rem; }
+    // h5 { font-size: @scale / 3 * 1rem; }
+    // h6 { font-size: @scale / 4 * 1rem; }
+
+    .shadow();
+    position: relative;
+    padding: 10px;
+    background-color: @primaryColor;
+
+    .title {
+        display: block;
+        text-align: center;
+        font-size: 1 * @scale * 1rem;
+        font-weight: 400;
+        margin-left: 24px;
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+
+    .menu-button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 24.5px 10px;
+        font-size: 1 * @scale * 1rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+}

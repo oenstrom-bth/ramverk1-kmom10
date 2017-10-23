@@ -1,0 +1,76 @@
+@import "modules/_normalize";
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import "modules/_colors";
+@import "modules/_variables";
+@import "modules/_typebase";
+@import "modules/_mixins";
+@import "modules/_helpers";
+@import "modules/_simple-scrollbar";
+@import "modules/_buttons";
+@import "modules/1_header";
+@import "modules/2_navbar";
+@import "modules/3_main";
+@import "modules/4_footer";
+
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+    background-color: @darkBackgroundColor;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    position: relative;
+    padding-bottom: 89px;
+    min-height: 100%;
+    background-color: #eee;
+}
+
+code {
+    background-color: @lightTextColor;
+}
+.grid {
+    overflow-x: hidden;
+}
+img {
+    vertical-align: middle;
+}
+
+a {
+    color: @accentColor;
+    .transition(color, 200ms);
+
+    &:hover {
+        color: @lightAccentColor;
+    }
+}
+.overlay {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.6;
+
+    &.show {
+        display: block;
+    }
+}
+.hyphenate {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
