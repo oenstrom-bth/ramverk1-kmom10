@@ -27,7 +27,7 @@ class PageRender implements PageRenderInterface, InjectionAwareInterface
     public function renderPage($data, $status = 200)
     {
         $data["stylesheets"] = ["css/style.min.css"];
-        $data["javascripts"] = ["js/main.js"];//["js/material.min.js"];
+        $data["javascripts"] = ["js/main.min.js"];//["js/material.min.js"];
         $navbar = $this->di->get("navbar")->getHTML();
 
         // Add layout, render it, add to response and send.
