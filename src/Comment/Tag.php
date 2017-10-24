@@ -29,6 +29,11 @@ class Tag extends ActiveRecordModelExtender
 
 
 
+    /**
+     * Get all tags.
+     *
+     * @return Array as the array with Tag objects
+     */
     public function getTags()
     {
         return $this->findAll();
@@ -36,6 +41,11 @@ class Tag extends ActiveRecordModelExtender
 
 
 
+    /**
+     * Get only the names of the tags.
+     *
+     * @return Array as array with tag names
+     */
     public function getTagNames()
     {
         $tags = $this->getTags();
@@ -49,7 +59,11 @@ class Tag extends ActiveRecordModelExtender
 
 
     /**
-     * awd
+     * Get tags connected to a post.
+     *
+     * @param Integer $postId the id of the post
+     *
+     * @return Array as the array of tags.
      */
     public function getPostTags($postId)
     {

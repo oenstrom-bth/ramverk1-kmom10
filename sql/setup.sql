@@ -1,6 +1,6 @@
 SET NAMES utf8;
 
-USE olen16;
+-- USE olen16;
 
 DROP TABLE IF EXISTS r1_PostTag;
 DROP TABLE IF EXISTS r1_Comment;
@@ -56,26 +56,25 @@ INSERT INTO r1_Post (userId, title, content) VALUES
 (7, 'This is question 09', '# Is this a question? \n Maybe so'),
 (1, 'This is question 10', '# Is this a question? \n Maybe so'),
 (3, 'This is question 11', '# Is this a question? \n Maybe so'),
-(1, 'This is question 12', '# Is this a question? \n Maybe so'),
+(7, 'This is question 12', '# Is this a question? \n Maybe so'),
 (6, 'This is question 13', '# Is this a question? \n Maybe so'),
 (7, 'This is question 14', '# Is this a question? \n Maybe so'),
 (5, 'This is question 15', '# Is this a question? \n Maybe so'),
-(1, 'This is question 16', '# Is this a question? \n Maybe so'),
-(4, 'This is question 17', '# Is this a question? \n Maybe so'),
+(7, 'This is question 16', '# Is this a question? \n Maybe so'),
+(3, 'This is question 17', '# Is this a question? \n Maybe so'),
 (2, 'This is question 18', '# Is this a question? \n Maybe so'),
-(1, 'This is question 19', '# Is this a question? \n Maybe so'),
+(7, 'This is question 19', '# Is this a question? \n Maybe so'),
 (6, 'This is question 20', '# Is this a question? \n Maybe so'),
 (7, 'This is question 21', '# Is this a question? \n Maybe so'),
 (2, 'This is question 22', '# Is this a question? \n Maybe so'),
-(1, 'This is question 23', '# Is this a question? \n Maybe so'),
-(5, 'This is question 24', '# Is this a question? \n Maybe so'),
+(2, 'This is question 23', '# Is this a question? \n Maybe so'),
+(2, 'This is question 24', '# Is this a question? \n Maybe so'),
 (1, 'This is question 25', '# Is this a question? \n Maybe so'),
 (3, 'This is question 26', '# Is this a question? \n Maybe so'),
 (4, 'This is question 27', '# Is this a question? \n Maybe so'),
 (6, 'This is question 28', '# Is this a question? \n Maybe so'),
 (7, 'This is question 29', '# Is this a question? \n Maybe so'),
-(5, 'This is question 30', '# Is this a question? \n Maybe so');
-
+(6, 'This is question 30', '# Is this a question? \n Maybe so');
 
 
 INSERT INTO r1_Post (userId, `type`, parent, title, content) VALUES
@@ -87,6 +86,7 @@ INSERT INTO r1_Post (userId, `type`, parent, title, content) VALUES
 (2, 'answer', 5, 'This is question 05', 'This is an answer to a question. djiaw wda w wjiaijd iawa ia ia jia ja jia j'),
 (1, 'answer', 6, 'This is question 06', 'This is an answer to a question. djiaw wda w wjiaijd iawa ia ia jia ja jia j'),
 (1, 'answer', 7, 'This is question 07', 'This is an answer to a question. djiaw wda w wjiaijd iawa ia ia jia ja jia j');
+
 
 
 CREATE TABLE r1_Comment (
@@ -139,4 +139,32 @@ CREATE TABLE r1_PostTag (
 
 INSERT INTO r1_PostTag (postId, tagId) VALUES
 (1, 1), (1, 2),
-(2, 4);
+(2, 4),
+(3, 3),
+(4, 6),
+(5, 5),
+(6, 9),
+(7, 7),
+(8, 2),
+(9, 1),
+(10, 1),
+(11, 4),
+(12, 8),
+(13, 8),
+(14, 9),
+(15, 2),
+(16, 1),
+(17, 3),
+(18, 2),
+(19, 1),
+(20, 5),
+(21, 7),
+(22, 8),
+(23, 6),
+(24, 2),
+(25, 9),
+(26, 3),
+(27, 1),
+(28, 5),
+(29, 7),
+(30, 6);

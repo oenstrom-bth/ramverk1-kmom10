@@ -1,5 +1,5 @@
 {
-    "name" : "anax/noname",
+    "name" : "oenstrom/stackunderflow",
     "description": "Stackoverflow copy for kmom10 in ramverk1",
     "license": "MIT",
     "require": {
@@ -16,8 +16,7 @@
         "anax/di": "^1.0",
         "anax/page": "^1.0",
         "anax/database": "^1.1",
-        "anax/htmlform": "^1.0",
-        "oenstrom/user": "^1.0"
+        "anax/htmlform": "^1.0"
     },
     "autoload": {
         "psr-4": {
