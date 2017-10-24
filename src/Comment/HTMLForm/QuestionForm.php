@@ -24,7 +24,7 @@ class QuestionForm extends FormModel
         $this->post = $post;
         $tags = $this->di->get("tag")->getTagNames();
         if ($post) {
-            $postTag = new PostTag($this->di->get("db"));
+            // $postTag = new PostTag($this->di->get("db"));
             $tag = $this->di->get("tag");
             $tagObjs = $tag->getPostTags($post->id);
             $checkedTags = array_map(function ($obj) {
@@ -35,6 +35,7 @@ class QuestionForm extends FormModel
             [
                 "id" => __CLASS__,
                 "legend" => "Question",
+                "class" => "question-form",
                 "use_fieldset" => false,
                 "wrapper-element" => "div",
                 "br-after-label" => false,
@@ -42,9 +43,9 @@ class QuestionForm extends FormModel
             [
                 "title" => [
                     "label" => "Title",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield",
-                    "class" => "mdl-textfield__input",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "text",
                     "value" => $post ? $post->title : "",
                     "validation" => ["not_empty"],
@@ -52,18 +53,20 @@ class QuestionForm extends FormModel
 
                 "content" => [
                     "label" => "Question",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield",
-                    "class" => "mdl-textfield__input",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "textarea",
                     "value" => $post ? $post->content : "",
                     "validation" => ["not_empty"],
                 ],
 
                 "tags" => [
-                    "type"        => "checkbox-multiple",
-                    "values"      => $tags,
-                    "checked"     => $post ? $checkedTags : [],
+                    "label"         => "Tags",
+                    "class"         => "checkbox",
+                    "type"          => "checkbox-multiple",
+                    "values"        => $tags,
+                    "checked"       => $post ? $checkedTags : [],
                 ],
 
                 "submit" => [

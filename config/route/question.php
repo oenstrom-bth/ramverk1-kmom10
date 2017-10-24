@@ -5,7 +5,12 @@
 return [
     "mount" => null,
     "routes" => [
-        // Routes accessible by anyone.
+        [
+            "info" => "Get all questions.",
+            "requestMethod" => "get",
+            "path" => "",
+            "callable" => ["postController", "getIndex"]
+        ],
         [
             "info" => "Get all questions.",
             "requestMethod" => "get",
@@ -61,13 +66,13 @@ return [
             "info" => "Post an answer to a question.",
             "requestMethod" => "get|post",
             "path" => "questions/{id:digit}/answer",
-            "callable" => ["postController", "getPostCreateAnswer"],
+            "callable" => ["postController", "getPostSaveAnswer"],
         ],
         [
             "info" => "Edit an answer to a question.",
             "requestMethod" => "get|post",
             "path" => "questions/{questionId:digit}/answer/edit/{answerId:digit}",
-            "callable" => ["postController", "getPostEditAnswer"],
+            "callable" => ["postController", "getPostSaveAnswer"],
         ],
 
         [

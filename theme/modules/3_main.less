@@ -1,4 +1,5 @@
 .site-main {
+    margin-top: 69px;
     padding: @leading / 2;
 
     .users-grid {
@@ -21,6 +22,59 @@
     .card-link {
         display: block;
         text-decoration: none;
+    }
+
+    .index-grid {
+        display: grid;
+        @media screen and (min-width: @medium-breakpoint) {
+            .card {
+                height: 100%;
+            }
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 2;
+            grid-column-gap: @leading / 2;
+            h2 { grid-row: 1}
+        }
+    }
+
+    .grid.large.half {
+        @media screen and (min-width: @large-breakpoint) {
+            display: grid;
+            grid-row-gap: @leading;
+            grid-template-columns: 1fr 1fr;
+
+            .marg-bot { margin-bottom: 0; }
+        }
+    }
+    .grid.tags {
+        .tag.big {
+            display: block;
+            padding: @leading / 2;
+        }
+        @media screen and (min-width: @small-breakpoint) {
+            display: grid;
+            grid-column-gap: @leading / 2;
+            grid-row-gap: @leading;
+            grid-template-columns: 1fr 1fr;
+
+            .marg-bot { margin-bottom: 0; }
+        }
+    }
+
+    .user-activity-grid {
+        display: grid;
+        @media screen and (min-width: @large-breakpoint) {
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: @leading / 2;
+        }
+    }
+
+    .profile-grid {
+        display: grid;
+        @media screen and (min-width: @medium-breakpoint) {
+            grid-template-columns: 5fr 2fr;
+            grid-column-gap: @leading / 2;
+        }
     }
 
     .tags-grid {
@@ -62,6 +116,7 @@
         right: .75rem;
         color: #fff;
         line-height: 1.5rem;
+        .transition(background);
         &:hover {
             background-color: @accentColor10Lighter;
         }
@@ -110,6 +165,37 @@
         max-width: 400px;
         margin-left: auto;
         margin-right: auto;
+    }
+    .index-card {
+        outline: none !important;
+        border: 1px solid @dividerColor;
+        margin-bottom: -1px;
+    }
+    .grid {
+        .questions {
+            display: grid;
+            margin-bottom: @leading;
+            @media screen and (min-width: @medium-breakpoint) {
+                grid-template-columns: 1fr 1fr;
+                grid-column-gap: @leading / 2;
+                grid-row-gap: @leading / 2;
+
+                section.question {
+                    margin-bottom: 0;
+                }
+            }
+            @media screen and (min-width: @large-breakpoint) {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            section.question {
+                outline: none;
+                border: 1px solid @dividerColor;
+                // -webkit-box-shadow: none;
+                // box-shadow: none;
+                // padding: 0;
+                // padding-bottom: @leading;
+            }
+        }
     }
     article.md, .card {
         background-color: #fff;

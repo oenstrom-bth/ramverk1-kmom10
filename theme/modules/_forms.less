@@ -1,0 +1,117 @@
+.form-wrapper {
+    padding: @leading / 2;
+    background-color: #fff;
+    outline: 1px solid @dividerColor;
+    .shadow();
+
+    output {
+        font-weight: 400;
+        &.success {
+            color: #4CAF50;
+        }
+        &.error {
+            color: #F44336;
+        }
+    }
+
+    &.child {
+        padding: 0;
+        background-color: transparent;
+        outline: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    &:not(:first-child) {
+        margin-top: @leading;
+    }
+
+    h2 {
+        margin-bottom: @leading;
+    }
+
+    .input {
+        margin-top: @leading * 1.75;
+        &:first-of-type { margin-top: 0; }
+        input, textarea {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 300;
+            font-size: 1 * @scale * 1rem;
+            line-height: @leading;
+            padding: @leading / 4;
+            border: none;
+            border-bottom: 2px solid @dividerColor;
+            margin-top: -2px;
+            width: 100%;
+            max-width: 100%;
+            .transition(border);
+
+            &:focus {
+                outline: none;
+                border-bottom-color: @accentColor;
+            }
+        }
+        textarea {
+            height: @leading * 6;
+        }
+    }
+    label {
+        display: block;
+        line-height: 1.5rem;
+    }
+
+
+    .checkbox {
+        display: none;
+        & + label {
+            &::before {
+                content: "\f096";
+                font-family: FontAwesome;
+                display: inline-block;
+                margin-right: 5px;
+                width: 25px;
+            }
+        }
+        &:checked + label {
+            &::before {
+                content: "\f046";
+            }
+        }
+    }
+}
+
+.question-form {
+    div:nth-of-type(3) {
+        display: grid;
+        margin-bottom: @leading;
+        grid-column-gap: @leading / 2;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "label label"
+            "checkbox checkbox";
+        @media screen and (min-width: @small-breakpoint) {
+            grid-template-areas:
+                "label label label"
+                "checkbox checkbox checkbox";
+        }
+        @media screen and (min-width: @medium-breakpoint) {
+            grid-template-areas:
+                "label label label label"
+                "checkbox checkbox checkbox checkbox";
+        }
+        @media screen and (min-width: @large-breakpoint) {
+            grid-template-areas:
+                "label label label label label"
+                "checkbox checkbox checkbox checkbox checkbox";
+        }
+        @media screen and (min-width: @xlarge-breakpoint) {
+            grid-template-areas:
+                "label label label label label label"
+                "checkbox checkbox checkbox checkbox checkbox checkbox";
+        }
+
+        p:first-of-type {
+            grid-area: label;
+        }
+    }
+}

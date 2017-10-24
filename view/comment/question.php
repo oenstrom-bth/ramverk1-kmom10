@@ -1,6 +1,5 @@
 <?php
 $loggedIn = $app->authHelper->isLoggedIn();
-
 ?>
 <article class="question">
     <h1 class="hug"><?= $question->title ?></h1>
@@ -14,10 +13,10 @@ $loggedIn = $app->authHelper->isLoggedIn();
         <a href="<?= $this->url("questions/tagged/{$tag->tag}") ?>" class="tag"><?= $tag->tag ?></a>
         <?php endforeach; ?>
         <h4 class="hug">asked <?= $question->created ?></h4>
-        <p class="hug">
+        <p class="hug"><a href="<?= $this->url("users/{$question->user->username}") ?>" class="card-link">
             <?= $question->user->getGravatar(true, 90) ?>
             <?= $question->user->username ?>
-        </p>
+        </a></p>
         <p class="hug"><a href="<?= $this->url("questions/edit/{$question->id}") ?>">Edit</a>
     </footer>
 
@@ -50,10 +49,10 @@ $loggedIn = $app->authHelper->isLoggedIn();
 
     <footer>
         <h4 class="hug">answered <?= $answer->created ?></h4>
-        <p class="hug">
+        <p class="hug"><a href="<?= $this->url("users/{$answer->user->username}") ?>" class="card-link">
             <?= $answer->user->getGravatar(true, 90) ?>
             <?= $answer->user->username ?>
-        </p>
+        </a></p>
         <p class="hug"><a href="<?= $this->url("questions/{$question->id}/answer/edit/{$answer->id}") ?>">Edit</a>
     </footer>
 

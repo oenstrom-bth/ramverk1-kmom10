@@ -22,19 +22,6 @@ return [
             "file" => __DIR__ . "/route/flat-file-content.php",
         ],
 
-
-        [
-            "mount" => "remserver/api",
-            "file" => __DIR__ . "/route/remserver.php",
-        ],
-        [
-            "mount" => "comments",
-            "file" => __DIR__ . "/route/comment.php",
-        ],
-        [
-            "mount" => "book",
-            "file" => __DIR__ . "/route/books.php",
-        ],
         [
             // Keep this last since its a catch all
             "mount" => null,

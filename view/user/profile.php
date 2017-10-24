@@ -1,23 +1,23 @@
-<div class="mdl-cell mdl-cell--8-col mdl-shadow--2dp padd-10">
-    <h2>Din profil</h2>
-    <?= $gravatar ?>
-    <?= $form ?>
-</div>
+<div class="profile-grid">
+    <div class="card marg-bot-half">
+        <h2 class="hug">Your Profile</h2>
+        <?= $gravatar ?>
+        <h3 class="hug">@<?= $user->username ?></h3>
+        <div class="form-wrapper child">
+            <?= $form ?>
+        </div>
+    </div>
 
-<div class="mdl-cell mdl-cell--4-col mdl-shadow--2dp padd-10">
-    <h2>Länkar</h2>
-    <ul class="mdl-list">
-        <li class="mdl-list__item">
-            <a href="<?= $this->url("comments") ?>" class="mdl-list__item-primary-content">
-                <i class="material-icons">comment</i>
-                <span>Kommentarer</span>
-            </a>
-        </li>
-        <li class="mdl-list__item">
-            <a href="<?= $this->url("user/logout") ?>" class="mdl-list__item-primary-content">
-                <i class="material-icons">exit_to_app</i>
-                <span>Logga ut</span>
-            </a>
-        </li>
-    </ul>
+    <div class="card marg-bot-half">
+        <h2 class="hug">Links</h2>
+        <ul>
+            <li><a href="<?= $this->url("questions/ask") ?>">Ask Question</a></li>
+            <li><a href="<?= $this->url("users/{$user->username}") ?>">Your Activity</a></li>
+            <li>
+                <a href="<?= $this->url("user/logout") ?>">
+                    <span>Logga ut</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>

@@ -120,23 +120,6 @@ return [
                 return $nav;
             }
         ],
-        "rem" => [
-            "shared" => true,
-            "callback" => function () {
-                $rem = new \Anax\RemServer\RemServer();
-                $rem->configure("remserver.php");
-                $rem->injectSession($this->get("session"));
-                return $rem;
-            }
-        ],
-        "remController" => [
-            "shared" => false,
-            "callback" => function () {
-                $rem = new \Anax\RemServer\RemServerController();
-                $rem->setDI($this);
-                return $rem;
-            }
-        ],
         "tag" => [
             "shared" => false,
             "callback" => function () {

@@ -6,7 +6,6 @@ use \Anax\DI\InjectionAwareInterface;
 use \Anax\DI\InjectionAwareTrait;
 use \Oenstrom\User\User;
 use \Oenstrom\Comment\HTMLForm\TagForm;
-// use \Oenstrom\Comment\HTMLForm\EditCommentForm;
 
 /**
  * A controller class.
@@ -15,34 +14,30 @@ class TagController implements InjectionAwareInterface
 {
     use InjectionAwareTrait;
 
+
+
+    /**
+     * Get all tags
+     */
     public function getTags()
     {
         $title       = "Tags";
         $view        = $this->di->get("view");
         $pageRender  = $this->di->get("pageRender");
-        $auth        = $this->di->get("authHelper");
-        // $post        = new Post();
-        //$user        = new User();
-        // $user        = new User($this->di->get("db"));
         $tag         = $this->di->get("tag");
 
-        // $post->setDb($this->di->get("db"));
-        //$user->setDb($this->di->get("db"));
-        //$comment->setTextfilter($this->di->get("textfilter"));
-        // $questions = $post->getQuestions();
-        // foreach ($questions as $question) {
-        //     $question->tags = $tag->getTags($question->id);
-        //     $question->user = $user->find("id", $question->userId);
-        // }
-        // $pag = $this->getPagination($questions);
         $tags = $tag->getTags();
-
         $view->add("comment/tag-list", [
             "tags" => $tags,
         ]);
         return $pageRender->renderPage(["title" => $title]);
     }
 
+
+
+    /**
+     * Create a new tag.
+     */
     public function getPostCreateTag()
     {
         $title       = "Create tag";
@@ -56,9 +51,18 @@ class TagController implements InjectionAwareInterface
 
         $form = new TagForm($this->di);
         $form->check();
-        $view->add("comment/tag-form", ["form" => $form->getHTML(["use_buttonbar" => false])]);
+        $view->add("comment/tag-form", ["form" => $form->getHTML(["use_buttonbar" => false]), "title" => $title]);
         return $pageRender->renderPage(["title" => $title]);
     }
+
+
+
+    /**
+     * Edit a tag.
+     *
+     * @param String $tagName the tag to edit
+     *
+     */
     public function getPostEditTag($tagName)
     {
         $title       = "Edit tag";
@@ -74,7 +78,7 @@ class TagController implements InjectionAwareInterface
 
         $form = new TagForm($this->di, $tag);
         $form->check();
-        $view->add("comment/tag-form", ["form" => $form->getHTML(["use_buttonbar" => false])]);
+        $view->add("comment/tag-form", ["form" => $form->getHTML(["use_buttonbar" => false]), "title" => $title]);
         return $pageRender->renderPage(["title" => $title]);
     }
 }

@@ -22,31 +22,31 @@ class LoginForm extends FormModel
         $this->form->create(
             [
                 "id" => __CLASS__,
-                "legend" => "Logga in",
+                "legend" => "Sign in",
             ],
             [
                 "username" => [
-                    "label" => "Användarnamn",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "Username",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "text",
                     "validation" => ["not_empty"],
                 ],
 
                 "password" => [
-                    "label" => "Lösenord",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "Password",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "password",
                     "validation" => ["not_empty"],
                 ],
 
                 "submit" => [
-                    "class" => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",
+                    "class" => "btn",
                     "type" => "submit",
-                    "value" => "Logga in",
+                    "value" => "Sign In",
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ]
@@ -69,7 +69,7 @@ class LoginForm extends FormModel
         $password = $this->form->value("password");
 
         if (!$user->verifyPassword($username, $password)) {
-            $this->form->addOutput("Användarnamnet eller lösenordet stämde inte.", "error");
+            $this->form->addOutput("Invalid credentials.", "error");
             return false;
         }
         $session = $this->di->get("session");

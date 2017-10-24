@@ -65,6 +65,10 @@ class AuthHelper implements InjectionAwareInterface
     {
         $user = $this->getLoggedInUser();
 
+        if (!$user) {
+            return false;
+        }
+
         if ($user->role === "admin") {
             return true;
         }

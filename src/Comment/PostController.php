@@ -18,6 +18,44 @@ class PostController implements InjectionAwareInterface
 
 
     /**
+     * Index page.
+     */
+    public function getIndex()
+    {
+        $title       = "Start";
+        $view        = $this->di->get("view");
+        $pageRender  = $this->di->get("pageRender");
+        $post        = new Post($this->di->get("db"));
+        $user        = new User($this->di->get("db"));
+        $tag         = $this->di->get("tag");
+        $postTag     = new PostTag($this->di->get("db"));
+
+        $mostActive = $user->getMostActive();
+        $popularTags = $postTag->getPopularTags(6);
+
+        $questions = $post->getQuestions();
+        foreach ($questions as $question) {
+            $question->tags = $tag->getPostTags($question->id);
+            $question->user = $user->findAllWhere("id = ?", [$question->userId])[0];//$user->find("id", $question->userId);
+        }
+
+        $pag = $this->getPagination([]);
+        // $view->add("comment/question-list", [
+        //     "questions" => array_slice($questions, 0, 3, true),
+        //     "pag" => $pag,
+        // ]);
+        $view->add("comment/index", [
+            "mostActive" => $mostActive,
+            "popularTags" => $popularTags,
+            "questions" => array_slice($questions, 0, 3, true),
+            "pag" => $pag,
+        ]);
+        return $pageRender->renderPage(["title" => $title]);
+    }
+
+
+
+    /**
      * Show all comments and comment form.
      *
      * @return void
@@ -27,7 +65,6 @@ class PostController implements InjectionAwareInterface
         $title       = "Questions";
         $view        = $this->di->get("view");
         $pageRender  = $this->di->get("pageRender");
-        $auth        = $this->di->get("authHelper");
         $post        = new Post($this->di->get("db"));
         $user        = new User($this->di->get("db"));
         $tag         = $this->di->get("tag");
@@ -48,12 +85,17 @@ class PostController implements InjectionAwareInterface
 
 
 
+    /**
+     * Get all questions with a certain tag.
+     *
+     * @param String $tagName the question tag
+     *
+     */
     public function getTaggedQuestions($tagName)
     {
         $title       = "Questions tagged with $tagName";
         $view        = $this->di->get("view");
         $pageRender  = $this->di->get("pageRender");
-        $auth        = $this->di->get("authHelper");
         $post        = new Post($this->di->get("db"));
         $user        = new User($this->di->get("db"));
         $tag         = $this->di->get("tag");
@@ -83,10 +125,8 @@ class PostController implements InjectionAwareInterface
      */
     public function getOneQuestion($id)
     {
-        $title       = "Questions";
         $view        = $this->di->get("view");
         $pageRender  = $this->di->get("pageRender");
-        $auth        = $this->di->get("authHelper");
         $post        = new Post($this->di->get("db"));
         $user        = new User($this->di->get("db"));
         $comment     = $this->di->get("comment");
@@ -108,6 +148,15 @@ class PostController implements InjectionAwareInterface
         return $pageRender->renderPage(["title" => $question->title]);
     }
 
+
+
+    /**
+     * Get pagination settings for the questions.
+     *
+     * @param Array $questions as the array with questions
+     *
+     * @return Array the array with pagination settings
+     */
     public function getPagination($questions)
     {
         $req = $this->di->get("request");
@@ -130,7 +179,7 @@ class PostController implements InjectionAwareInterface
 
 
     /**
-     * Handler with form to delete an item.
+     * Handler with form to create a question
      *
      * @return void
      */
@@ -154,7 +203,9 @@ class PostController implements InjectionAwareInterface
 
 
     /**
-     * Handler with form to delete an item.
+     * Handler with form to edit a question.
+     *
+     * @param Integer $questionId the id of the question
      *
      * @return void
      */
@@ -184,40 +235,14 @@ class PostController implements InjectionAwareInterface
 
 
     /**
-     * Handler with form to delete an item.
+     * Handler with form to save an answer.
+     *
+     * @param Integer $questionId the id of the question
+     * @param Integer $answerId the id of the answer, if there is one, else null.
      *
      * @return void
      */
-    public function getPostCreateAnswer($questionId)
-    {
-        $title      = "Your Answer";
-        $view       = $this->di->get("view");
-        $pageRender = $this->di->get("pageRender");
-        $user       = $this->di->get("authHelper")->getLoggedInUser();
-        $question   = new Post($this->di->get("db"));
-        $question   = $question->find("id", $questionId);
-
-        if (!$user) {
-            $this->di->get("response")->redirect("user/login");
-        }
-
-        $form = new AnswerForm($this->di, $questionId);
-        $form->check();
-        $view->add("comment/answer-form", [
-            "form" => $form->getHTML(["use_buttonbar" => false]),
-            "question" => ["title" => $question->title, "content" => $question->getContentAsMarkdown()],
-        ]);
-        return $pageRender->renderPage(["title" => $title]);
-    }
-
-
-
-    /**
-     * Handler with form to delete an item.
-     *
-     * @return void
-     */
-    public function getPostEditAnswer($questionId, $answerId)
+    public function getPostSaveAnswer($questionId, $answerId = null)
     {
         $title      = "Your Answer";
         $view       = $this->di->get("view");
@@ -225,7 +250,6 @@ class PostController implements InjectionAwareInterface
         $user       = $this->di->get("authHelper")->getLoggedInUser();
         $question   = new Post($this->di->get("db"));
         $answer     = new Post($this->di->get("db"));
-
         $question->find("id", $questionId);
         $answer->find("id", $answerId);
 
@@ -233,11 +257,11 @@ class PostController implements InjectionAwareInterface
             $this->di->get("response")->redirect("user/login");
         }
 
-        if ($answer->userId !== $user->id && $user->role !== "admin") {
+        if ($answerId && $answer->userId !== $user->id && $user->role !== "admin") {
             $this->di->get("response")->redirect("questions/$questionId");
         }
 
-        $form = new AnswerForm($this->di, $questionId, $answer);
+        $form = new AnswerForm($this->di, $questionId, $answerId ? $answer : false);
         $form->check();
         $view->add("comment/answer-form", [
             "form" => $form->getHTML(["use_buttonbar" => false]),

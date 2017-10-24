@@ -37,45 +37,45 @@ class EditUserForm extends FormModel
             ],
             [
                 "username" => [
-                    "label" => "Användarnamn",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "Username",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "text",
                     "value" => $this->user->username,
                     "validation" => ["not_empty"],
                 ],
                 "email" => [
-                    "label" => "E-postadress",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "Email",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "text",
                     "value" => $this->user->email,
                     "validation" => ["email", "not_empty"],
                 ],
 
                 "new-password" => [
-                    "label" => "Nytt lösenord",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "New password",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "password",
                 ],
 
                 "new-password-again" => [
-                    "label" => "Nytt lösenord igen",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "Re-type new password",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "password",
                     "validation" => ["match" => "new-password"],
                 ],
 
                 "submit" => [
-                    "class" => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",
+                    "class" => "btn",
                     "type" => "submit",
-                    "value" => "Uppdatera",
+                    "value" => "Update",
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ]
@@ -117,13 +117,13 @@ class EditUserForm extends FormModel
         $user = new User($this->di->get("db"));
 
         if (!$isOldUsername && $user->usernameExists($username) !== null) {
-            $this->form->addOutput("Användarnamnet är upptaget.", "error");
+            $this->form->addOutput("The username does already exist.", "error");
             $this->di->get("response")->redirect("user/admin/users/update/{$this->user->id}");
             return false;
         }
 
         if (!$isOldEmail && $user->emailExists($email) !== null) {
-            $this->form->addOutput("E-postadressen är upptagen.", "error");
+            $this->form->addOutput("The email does already exist.", "error");
             $this->di->get("response")->redirect("user/admin/users/update/{$this->user->id}");
             return false;
         }
@@ -135,7 +135,7 @@ class EditUserForm extends FormModel
         $this->user->username = $username;
         $this->user->email = $email;
         $this->user->save();
-        $this->form->addOutput("Användaren har uppdaterats.", "success");
+        $this->form->addOutput("The user has been updated.", "success");
         $this->di->get("response")->redirect("user/admin/users/update/{$this->user->id}");
     }
 }

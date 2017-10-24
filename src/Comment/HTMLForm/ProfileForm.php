@@ -24,43 +24,43 @@ class ProfileForm extends FormModel
         $this->form->create(
             [
                 "id" => __CLASS__,
-                "legend" => "Uppdatera profil",
+                "legend" => "Update profile",
                 "use_fieldset" => false,
                 "wrapper-element" => "div",
                 "br-after-label" => false,
             ],
             [
                 "email" => [
-                    "label" => "E-postadress",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "Email",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "text",
                     "value" => $this->user->email,
                     "validation" => ["email", "not_empty"],
                 ],
 
                 "new-password" => [
-                    "label" => "Nytt lösenord",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "New password",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "password",
                 ],
 
                 "new-password-again" => [
-                    "label" => "Nytt lösenord igen",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "Re-type new password",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "password",
                     "validation" => ["match" => "new-password"],
                 ],
 
                 "submit" => [
-                    "class" => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",
+                    "class" => "btn",
                     "type" => "submit",
-                    "value" => "Uppdatera",
+                    "value" => "Update",
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ]
@@ -100,7 +100,7 @@ class ProfileForm extends FormModel
         $user = new User($this->di->get("db"));
 
         if (!$isOldEmail && $user->emailExists($email) !== null) {
-            $this->form->addOutput("E-postadressen är upptagen.", "error");
+            $this->form->addOutput("The email does already exist.", "error");
             $this->di->get("response")->redirect("user/profile");
             return false;
         }
@@ -116,7 +116,7 @@ class ProfileForm extends FormModel
         $this->user->email = $email;
         $this->user->save();
         $this->di->get("session")->set("email", $email);
-        $this->form->addOutput("Din profil har uppdaterats.", "success");
+        $this->form->addOutput("Your profile has been updated.", "success");
         $this->di->get("response")->redirect("user/profile");
     }
 }

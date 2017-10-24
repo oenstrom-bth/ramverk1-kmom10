@@ -3,6 +3,6 @@
     <?= $question["content"] ?>
 </article>
 
-<div class="card marg-top center-text">
+<div class="form-wrapper">
     <?= $form ?>
 </div>

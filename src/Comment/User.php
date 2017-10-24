@@ -36,6 +36,30 @@ class User extends ActiveRecordModelExtender
     //public $updated;
     public $deleted;
     //public $active;
+    //public $activity;
+
+
+
+    public function getMostActive()
+    {
+        $this->checkDb();
+        return $this->db->connect()
+                        ->select("r1_User.*, IFNULL(postCount, 0) + IFNULL(commentCount, 0) AS activity")
+                        ->from($this->tableName)
+                        ->leftJoin(
+                            "(SELECT userId, COUNT(userId) AS postCount FROM r1_Post GROUP BY userId) c1",
+                            "r1_User.id = c1.userId"
+                        )
+                        ->leftJoin(
+                            "(SELECT userId, COUNT(userId) AS commentCount FROM r1_Comment GROUP BY userId) c2",
+                            "r1_User.id = c2.userId"
+                        )
+                        ->where("(IFNULL(postCount, 0) + IFNULL(commentCount, 0)) > 0")
+                        ->orderBy("activity DESC")
+                        ->limit(6)
+                        ->execute()
+                        ->fetchAllClass(get_class($this));
+    }
 
 
 

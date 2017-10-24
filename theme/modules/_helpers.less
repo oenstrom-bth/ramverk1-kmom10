@@ -5,6 +5,27 @@
     vertical-align: middle;
 }
 
+.inline-block {
+    display: inline-block;
+}
+
+.clear::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+ul.no-style {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a.no-style {
+    text-decoration: none;
+    color: inherit;
+}
+
 .marg-bot {
     margin-bottom: @leading;
 }
@@ -16,7 +37,16 @@
     margin-top: @leading;
 }
 
-.figure.left {
-    float: left;
-    margin: @leading @leading / 2 0 0;
+.marg-right-half {
+    margin-right: @leading / 2;
+}
+
+.figure {
+    &.left {
+        float: left;
+        margin: @leading @leading / 2 0 0;
+    }
+    &.no-marg {
+        margin-top: 0;
+    }
 }

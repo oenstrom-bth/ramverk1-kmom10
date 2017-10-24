@@ -8,6 +8,7 @@
 @import "modules/_helpers";
 @import "modules/_simple-scrollbar";
 @import "modules/_buttons";
+@import "modules/_forms";
 @import "modules/1_header";
 @import "modules/2_navbar";
 @import "modules/3_main";
@@ -44,11 +45,11 @@ img {
 }
 
 a {
-    color: @accentColor;
+    color: #2196F3;
     .transition(color, 200ms);
 
     &:hover {
-        color: @lightAccentColor;
+        color: @accentColor;
     }
 }
 .overlay {
@@ -73,4 +74,28 @@ a {
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     hyphens: auto;
+}
+
+.responsive-table {
+    overflow-x: scroll;
+}
+table {
+    width: 100%;
+    min-width: 920px;
+    text-align: left;
+
+    tr {
+        .transition(background);
+        td, th {
+            padding: @leading / 2;
+        }
+    }
+
+    tr:nth-of-type(even) {
+        background-color: lighten(@dividerColor, 20%);
+    }
+
+    tr:hover, tr:nth-of-type(even):hover {
+        background-color: lighten(@dividerColor, 10%);
+    }
 }

@@ -22,52 +22,52 @@ class RegisterForm extends FormModel
         $this->form->create(
             [
                 "id" => __CLASS__,
-                "legend" => "Skapa konto",
+                "legend" => "Sign up",
                 "use_fieldset" => false,
                 "wrapper-element" => "div",
                 "br-after-label" => false,
             ],
             [
                 "username" => [
-                    "label" => "Användarnamn",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "Username",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "text",
                     "validation" => ["not_empty"],
                 ],
 
                 "email" => [
-                    "label" => "E-postadress",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "Email",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "email",
                     "validation" => ["email", "not_empty"],
                 ],
 
                 "password" => [
-                    "label" => "Lösenord",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "Password",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "password",
                     "validation" => ["not_empty"],
                 ],
 
                 "password-again" => [
-                    "label" => "Lösenord igen",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield mdl-textfield--floating-label",
-                    "class" => "mdl-textfield__input",
+                    "label" => "Re-type password",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "password",
                     "validation" => ["match" => "password", "not_empty"],
                 ],
 
                 "submit" => [
-                    "class" => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent",
+                    "class" => "btn",
                     "type" => "submit",
-                    "value" => "Skapa konto",
+                    "value" => "Sign Up",
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ]
@@ -90,17 +90,17 @@ class RegisterForm extends FormModel
         $user = new User($this->di->get("db"));
 
         if ($user->usernameExists($username) !== null) {
-            $this->form->addOutput("Användarnamnet är upptaget.", "error");
+            $this->form->addOutput("The username does already exist.", "error");
             return false;
         }
 
         if ($user->emailExists($email) !== null) {
-            $this->form->addOutput("E-postadressen är upptagen.", "error");
+            $this->form->addOutput("The email does already exist.", "error");
             return false;
         }
 
         if (empty($username) || empty($email)) {
-            $this->form->addOutput("Fyll i fälten.", "error");
+            $this->form->addOutput("Fill in the fields.", "error");
             return false;
         }
 
@@ -109,7 +109,7 @@ class RegisterForm extends FormModel
         $user->setPassword($this->form->value("password"));
         $user->email = $this->form->value("email");
         $user->save();
-        $this->form->addOutput("Kontot har skapats.", "success");
+        $this->form->addOutput("The account has been created.", "success");
         $this->di->get("response")->redirect($this->di->get("request")->getRoute());
     }
 }

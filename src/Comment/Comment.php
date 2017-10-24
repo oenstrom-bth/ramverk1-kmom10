@@ -36,7 +36,8 @@ class Comment extends ActiveRecordModelExtender
     /**
      * Get all comments that belongs the post with the specified id.
      *
-     * @param integer $postId The id of the post.
+     * @param Integer $postId The id of the post.
+     * @param User $user The User object
      *
      * @return array as the array of Comment objects.
      */
@@ -51,6 +52,11 @@ class Comment extends ActiveRecordModelExtender
 
 
 
+    /**
+     * Get content of the comment
+     *
+     * @return String as the comment
+     */
     public function getContent()
     {
         $text = htmlentities($this->content);

@@ -32,9 +32,9 @@ class AnswerForm extends FormModel
             [
                 "content" => [
                     "label" => "Your Answer",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield",
-                    "class" => "mdl-textfield__input",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "textarea",
                     "value" => $post ? $post->content : "",
                     "validation" => ["not_empty"],

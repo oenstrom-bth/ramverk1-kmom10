@@ -7,7 +7,7 @@
 
 ?>
 <!-- <h2 class="hug">Newest questions</h2> -->
-<?php if ($loggedIn) : ?>
+<?php if ($loggedIn && !isset($noButton)) : ?>
 <a href="<?= $this->url("questions/ask") ?>" class="btn no-marg">Ask Question</a>
 <?php endif; ?>
 <div class="questions">
@@ -33,7 +33,10 @@
             <a href="<?= $this->url("questions/tagged/{$tag->tag}") ?>" class="tag"><?= $tag->tag ?></a>
             <?php endforeach; ?>
             <h4 class="hug">Asked at <strong><?= $question->created ?></strong></h4>
-            <p class="hug"><?= $question->user->getGravatar(true, 90) ?> <?= $question->user->username ?></p>
+            <p class="hug"><a href="<?= $this->url("users/{$question->user->username}") ?>" class="card-link">
+                <?= $question->user->getGravatar(true, 90) ?>
+                <?= $question->user->username ?>
+            </a></p>
         </footer>
     </section>
     <?php endforeach; ?>

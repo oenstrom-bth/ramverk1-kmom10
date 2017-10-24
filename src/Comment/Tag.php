@@ -2,10 +2,7 @@
 
 namespace Oenstrom\Comment;
 
-// use \Anax\Database\ActiveRecordModel;
 use \Oenstrom\Comment\ActiveRecordModelExtender;
-// use \Anax\TextFilter\TextFilter;
-// use \Oenstrom\User\User;
 
 /**
  * A database driven model.

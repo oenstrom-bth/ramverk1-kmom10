@@ -114,13 +114,15 @@ class UserController implements InjectionAwareInterface
         $pageRender  = $this->di->get("pageRender");
         $auth        = $this->di->get("authHelper");
         $form        = new ProfileForm($this->di);
+        $user        = new User($this->di->get("db"));
 
         $form->check();
 
 
         $data = [
             "form" => $form->getHTML(["use_buttonbar" => false]),
-            "gravatar" => $this->getGravatar($this->di->get("session")->get("email"), true, 256)
+            "gravatar" => $this->getGravatar($this->di->get("session")->get("email"), true, 256),
+            "user" => $user->find("email", $this->di->get("session")->get("email")),
         ];
 
         if ($auth->isAdmin()) {
@@ -132,21 +134,25 @@ class UserController implements InjectionAwareInterface
 
 
 
+    /**
+     * Get the users activity.
+     *
+     * @param String $username the users username
+     */
     public function getUserActivity($username)
     {
         $title       = "{$username}'s Activity";
         $view        = $this->di->get("view");
         $pageRender  = $this->di->get("pageRender");
-        $auth        = $this->di->get("authHelper");
         $post        = new Post($this->di->get("db"));
         $user        = new User($this->di->get("db"));
-        $tag         = $this->di->get("tag");
         $user->find("username", $username);
 
         $questions = $post->getQuestions("type = ? AND userId = ?", ["question", $user->id]);
         $answered = $post->getQuestions("type = ? AND userId = ?", ["answer", $user->id]);
 
         $view->add("comment/user-activity", [
+            "user" => $user,
             "questions" => $questions,
             "answered" => $answered,
         ]);

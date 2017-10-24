@@ -34,9 +34,9 @@ class CommentForm extends FormModel
             [
                 "content" => [
                     "label" => "Your Comment",
-                    "label-class" => "mdl-textfield__label",
-                    "wrapper-class" => "mdl-textfield mdl-js-textfield",
-                    "class" => "mdl-textfield__input",
+                    // "label-class" => "mdl-textfield__label",
+                    "wrapper-class" => "input",
+                    // "class" => "mdl-textfield__input",
                     "type" => "textarea",
                     "value" => $comment ? $comment->content : "",
                     "validation" => ["not_empty"],

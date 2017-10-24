@@ -2,10 +2,7 @@
 
 namespace Oenstrom\Comment;
 
-// use \Anax\Database\ActiveRecordModel;
 use \Oenstrom\Comment\ActiveRecordModelExtender;
-// use \Anax\TextFilter\TextFilter;
-// use \Oenstrom\User\User;
 
 /**
  * A database driven model.
@@ -24,8 +21,39 @@ class PostTag extends ActiveRecordModelExtender
      *
      * @var integer $id primary key auto incremented.
      */
+    public $id;
     public $postId;
     public $tagId;
+
+
+
+    /**
+     * Get the most popluar tags.
+     *
+     * @param Integer $limit the number of tags
+     *
+     * @return Array as array of tags
+     */
+    public function getPopularTags($limit)
+    {
+        $this->checkDb();
+        $tagsIds = $this->db->connect()
+                        ->select("tagId, COUNT(tagId) AS count")
+                        ->from($this->tableName)
+                        ->groupBy("tagId")
+                        ->orderBy("count DESC")
+                        ->limit($limit)
+                        ->execute()
+                        ->fetchAllClass(get_class($this));
+
+        $tags = array_map(function ($obj) {
+            $tag = new Tag($this->db);
+            $tag->find("id", $obj->tagId);
+            $tag->count = $obj->count;
+            return $tag;
+        }, $tagsIds);
+        return $tags;
+    }
 
 
     public function clear($postId, $db)

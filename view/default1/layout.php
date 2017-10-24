@@ -18,7 +18,9 @@
             <?php $this->renderRegion("header") ?>
 
         <?php if ($this->regionHasContent("navbar")) : ?>
+        <div id="overlay" class="overlay"></div>
         <nav id="navbar" class="navbar" ss-container>
+            <a href="<?= $this->url("") ?>" class="navbar-title"><img src="<?= $this->asset("image/stackunderflow.png?w=250") ?>" alt="Stack Underflow"></a>
             <?php $this->renderRegion("navbar") ?>
 
             <div class="extra-links">
@@ -56,7 +58,6 @@
     </footer>
     <?php endif; ?>
 </div>
-<div id="overlay" class="overlay"></div>
 <!-- <div id="baseline-overlay" style="background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='30'><rect style='fill: rgb(196,196,196);'  width='1' height='0.25px' x='0' y='29'/></svg>&quot;); position: absolute; top: 54px; left: 0px; z-index: 9998; pointer-events: none; opacity: 1; width: 1325px; height: 8864px; display: block;"></div> -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>

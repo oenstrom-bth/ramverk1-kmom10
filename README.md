@@ -2,7 +2,6 @@ Stack Underflow
 ==================================
 
 [![Build Status](https://travis-ci.org/oenstrom/ramverk1-kmom10.svg?branch=master)](https://travis-ci.org/oenstrom/ramverk1-kmom10)
-[![CircleCI](https://circleci.com/gh/oenstrom/ramverk1-kmom10.svg?style=svg)](https://circleci.com/gh/oenstrom/ramverk1-kmom10)
 [![Build Status](https://scrutinizer-ci.com/g/oenstrom/ramverk1-kmom10/badges/build.png?b=master)](https://scrutinizer-ci.com/g/oenstrom/ramverk1-kmom10/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/oenstrom/ramverk1-kmom10/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/oenstrom/ramverk1-kmom10/?branch=master)
 
@@ -17,7 +16,7 @@ Install
 First clone the repo.
 
 ```
-git clone BLABLA
+git clone https://github.com/oenstrom/ramverk1-kmom10.git
 ```
 
 
